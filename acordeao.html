@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Linha do Tempo com Círculos Centrais</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 50px;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 1000px;
+      margin: auto;
+      height: 140px;
+    }
+
+    .timeline-line {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background-color: #000;
+      z-index: 1;
+    }
+
+    .step {
+      position: absolute;
+      top: 60px;               /* exatamente na linha */
+      text-align: center;
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    .step .circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      margin: -12px auto 8px;  /* puxa o círculo 12px para cima */
+      border: 2px solid white;
+    }
+
+    .step span {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 0;            /* texto logo abaixo da linha */
+    }
+
+    .s1 { left: 5%; }
+    .s2 { left: 25%; }
+    .s3 { left: 45%; }
+    .s4 { left: 65%; }
+    .s5 { left: 85%; }
+
+    .s1 .circle { background: #c0392b; }
+    .s2 .circle { background: #d35400; }
+    .s3 .circle { background: #f1c40f; }
+    .s4 .circle { background: #27ae60; }
+    .s5 .circle { background: #2980b9; }
+
+    /* modal & overlay (mesmo do antes) */
+    .overlay {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none; z-index: 10;
+    }
+    .modal {
+      background: #fff; padding: 30px;
+      width: 60%; max-width: 600px;
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      border-radius: 10px; display: none;
+      z-index: 11; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .modal h2 { margin-top: 0; }
+    .close-btn {
+      position: absolute; top: 10px; right: 20px;
+      font-size: 20px; cursor: pointer; color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sequência dos processos</h1>
+
+  <div class="timeline">
+    <div class="timeline-line"></div>
+
+    <div class="step s1" onclick="openModal('m1')">
+      <div class="circle"></div>
+      <span>Levantamento<br>de Requisitos</span>
+    </div>
+    <div class="step s2" onclick="openModal('m2')">
+      <div class="circle"></div>
+      <span>Planejamento</span>
+    </div>
+    <div class="step s3" onclick="openModal('m3')">
+      <div class="circle"></div>
+      <span>Execução</span>
+    </div>
+    <div class="step s4" onclick="openModal('m4')">
+      <div class="circle"></div>
+      <span>Validação</span>
+    </div>
+    <div class="step s5" onclick="openModal('m5')">
+      <div class="circle"></div>
+      <span>Entrega Final</span>
+    </div>
+  </div>
+
+  <div id="overlay" class="overlay" onclick="closeModal()"></div>
+
+  <div id="m1" class="modal">
+    <span class="close-btn" onclick="closeModal()">×</span>
+    <h2>Levantamento de Requisitos</h2>
+    <p>Identificação das necessidades e definição do escopo inicial do projeto.</p>
+  </div>
+  <div id="m2" class="modal">
+    <span class="close-btn" onclick="closeModal()">×</span>
+    <h2>Planejamento</h2>
+    <p>Criação de cronograma, responsáveis, orçamento e definição de entregas.</p>
+  </div>
+  <div id="m3" class="modal">
+    <span class="close-btn" onclick="closeModal()">×</span>
+    <h2>Execução</h2>
+    <p>Implementação das ações planejadas com monitoramento contínuo.</p>
+  </div>
+  <div id="m4" class="modal">
+    <span class="close-btn" onclick="closeModal()">×</span>
+    <h2>Validação</h2>
+    <p>Revisão dos resultados, testes e feedback dos envolvidos.</p>
+  </div>
+  <div id="m5" class="modal">
+    <span class="close-btn" onclick="closeModal()">×</span>
+    <h2>Entrega Final</h2>
+    <p>Formalização da entrega, documentação e encerramento do processo.</p>
+  </div>
+
+  <script>
+    function openModal(id) {
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById(id).style.display = 'block';
+    }
+    function closeModal() {
+      document.querySelectorAll('.modal').forEach(m=>m.style.display='none');
+      document.getElementById('overlay').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
